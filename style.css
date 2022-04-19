@@ -1,0 +1,47 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-size: cover;
+  background-repeat: no-repeat;
+  gap: 50px;
+}
+#country {
+  width: 5.375rem;
+}
+#zip {
+  width: 6.25rem;
+  outline: none;
+}
+#submit {
+  padding: 2px;
+  margin-left: 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+#form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+#results {
+  background-color: wheat;
+}
+
+.hidden {
+  visibility: hidden;
+}
+/* 
+#zip:invalid,
+#country:invalid {
+  border: 2px solid red;
+} */
