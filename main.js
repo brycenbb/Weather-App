@@ -32,6 +32,62 @@ function formSubmitted() {
 //Populates the page with DOM manipulation after the form is submitted, data is the JSON of weather data
 function populatePage(data) {
   console.log('todo');
+  let container = document.getElementById('results');
+  //If this was a weekly forecast I would structure the page as so:
+  //row 1 = location, date, time , current temp with high/low/humidity
+  //row 2 = weeks worth of weather
+
+  let row = document.createElement('div');
+  row.classList.add('row');
+  let box1 = document.createElement('div');
+  let datetime = document.createElement('div');
+  let today = new Date();
+  let hour = today.getHours();
+  let minute = today.getMinutes();
+  if (today.getHours() < 10) {
+    hour = '0' + hour;
+  }
+  if (today.getMinutes() < 10) {
+    minute = '0' + minute;
+  }
+
+  let time = hour + ':' + minute;
+  let monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  let date = monthNames[today.getMonth()] + ', ' + today.getDay();
+  datetime.textContent = date + ' -- ' + time;
+  box1.textContent = data.name + ', ' + data.sys.country;
+  row.appendChild(box1);
+  row.appendChild(datetime);
+
+  container.appendChild(row);
+
+  //second row, temperature information:
+  let row2 = document.createElement('div');
+  let currtemp = document.createElement('div');
+  let lowtemp = document.createElement('div');
+  let maxtemp = document.createElement('div');
+  currtemp.textContent = data.main.temp;
+  currtemp.style.fontWeight = 'bold';
+  currtemp.style.fontSize = '1.5rem';
+  lowtemp.textContent = 'Min: ' + data.main.temp_min + '\u2103';
+  maxtemp.textContent = 'Max: ' + data.main.temp_max + '\u2103';
+  row2.appendChild(currtemp);
+  row2.appendChild(lowtemp);
+  row2.appendChild(maxtemp);
+  container.appendChild(row2);
 }
 
 async function getWeather() {
@@ -59,7 +115,6 @@ async function getWeather() {
   getBackground(String(weatherData.weather[0].main));
   populatePage(weatherData);
   document.getElementById('results').classList.remove('hidden');
-  document.getElementById('results').textContent = weatherData.main.temp;
 }
 
 async function getBackground(input) {
