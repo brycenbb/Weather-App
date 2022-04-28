@@ -16,9 +16,12 @@ async function pageLoad() {
     { mode: 'cors' }
   )
     .then(function (response) {
+      console.log(response);
+
       return response.json();
     })
     .then(function (response) {
+      console.log(response);
       let url = response.data.images.original.url;
       document.body.style.backgroundImage = 'url(' + url + ')';
     });
